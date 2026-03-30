@@ -27,8 +27,9 @@ class TestRenderCycleGrid:
     def test_no_column_shift_from_marker(self):
         grid = render_cycle_grid(2026, 1, 5, use_color=False)
         lines = grid.strip().split("\n")
-        day_lines = [l for l in lines if any(c.isdigit() for c in l)]
-        for line in day_lines:
+        weekday_idx = next(i for i, l in enumerate(lines) if l.startswith("Mo"))
+        week_lines = lines[weekday_idx + 1:]
+        for line in week_lines:
             assert len(line.rstrip()) <= 20
 
     def test_february_non_leap(self):
