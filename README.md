@@ -105,9 +105,60 @@ Auto-detection: if the input matches `^[0-9a-fA-F]{64}$`, it is treated as a hex
 
 A warning is emitted for constants shorter than 16 characters (passphrase) or 128 bits (hex).
 
-## Running tests
+## Development Setup
+
+### Prerequisites
+
+- Python 3.12+
+- pip
+
+### Install dependencies
 
 ```bash
-pip install pytest
+pip install -e .
+pip install pytest pytest-cov mypy ruff pre-commit
+```
+
+### Pre-commit hooks
+
+The repository includes a `.pre-commit-config.yaml` that runs ruff (lint + format) and mypy before each commit.
+
+```bash
+pre-commit install
+```
+
+To run all hooks manually against the entire codebase:
+
+```bash
+pre-commit run --all-files
+```
+
+### Running tests
+
+Tests run with coverage reporting (90% threshold on library code):
+
+```bash
 pytest
+```
+
+To run a specific test:
+
+```bash
+pytest tests/test_observatory.py::TestRoundTrip::test_all_bodies_round_trip_january -v
+```
+
+### Linting and formatting
+
+```bash
+ruff check .          # lint
+ruff check --fix .    # lint with auto-fix
+ruff format .         # format
+```
+
+### Type checking
+
+Strict mode is enabled for the `parade/` package:
+
+```bash
+mypy parade/
 ```
