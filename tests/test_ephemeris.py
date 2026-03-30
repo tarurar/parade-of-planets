@@ -1,5 +1,3 @@
-import pytest
-
 from parade.ephemeris import render_cycle_grid, render_ephemeris
 
 
@@ -27,8 +25,8 @@ class TestRenderCycleGrid:
     def test_no_column_shift_from_marker(self):
         grid = render_cycle_grid(2026, 1, 5, use_color=False)
         lines = grid.strip().split("\n")
-        weekday_idx = next(i for i, l in enumerate(lines) if l.startswith("Mo"))
-        week_lines = lines[weekday_idx + 1:]
+        weekday_idx = next(i for i, line in enumerate(lines) if line.startswith("Mo"))
+        week_lines = lines[weekday_idx + 1 :]
         for line in week_lines:
             assert len(line.rstrip()) <= 20
 

@@ -1,5 +1,5 @@
-import hmac
 import hashlib
+import hmac
 
 import pytest
 
@@ -60,7 +60,7 @@ class TestComputeOrbitalSignature:
 
     def test_matches_manual_hmac(self):
         key = b"test-key"
-        msg = "2026|3".encode()
+        msg = b"2026|3"
         expected = hmac.new(key, msg, hashlib.sha256).digest()
         result = compute_orbital_signature(key, 2026, 3)
         assert result == expected

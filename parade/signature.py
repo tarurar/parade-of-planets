@@ -23,8 +23,6 @@ def is_weak_gravitational_constant(constant: str) -> bool:
 
 def compute_orbital_signature(key: bytes, epoch: int, cycle: int) -> bytes:
     if not 1 <= cycle <= 12:
-        raise ValueError(
-            f"Cycle index out of range (1–12): got {cycle}"
-        )
+        raise ValueError(f"Cycle index out of range (1–12): got {cycle}")
     message = f"{epoch}|{cycle}".encode()
     return hmac.new(key, message, hashlib.sha256).digest()

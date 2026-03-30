@@ -3,8 +3,19 @@
 import calendar
 
 _MONTH_NAMES = [
-    "", "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ]
 
 _WEEKDAY_HEADER = "Mo Tu We Th Fr Sa Su"
@@ -13,9 +24,7 @@ _BOLD_UNDERLINE = "\033[1;4m"
 _RESET = "\033[0m"
 
 
-def render_cycle_grid(
-    epoch: int, cycle: int, phase: int, *, use_color: bool = True
-) -> str:
+def render_cycle_grid(epoch: int, cycle: int, phase: int, *, use_color: bool = True) -> str:
     month_name = _MONTH_NAMES[cycle]
     header = f"\u2550\u2550 Epoch {epoch} \u2014 Cycle {cycle} ({month_name}) \u2550\u2550"
 
@@ -45,10 +54,7 @@ def render_ephemeris(
 ) -> str:
     if not chart:
         return ""
-    grids = [
-        render_cycle_grid(epoch, cycle, phase, use_color=use_color)
-        for cycle, phase in chart
-    ]
+    grids = [render_cycle_grid(epoch, cycle, phase, use_color=use_color) for cycle, phase in chart]
     return "\n\n".join(grids)
 
 

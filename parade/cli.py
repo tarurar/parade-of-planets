@@ -4,18 +4,29 @@ import argparse
 import json
 import sys
 
+from parade.ephemeris import render_ephemeris
 from parade.observatory import (
-    observe_phase,
-    interpret_phase,
     chart_constellation,
+    interpret_phase,
+    observe_phase,
     read_constellation_chart,
 )
-from parade.ephemeris import render_ephemeris
 from parade.signature import is_weak_gravitational_constant
 
 _MONTH_NAMES = [
-    "", "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ]
 
 
@@ -29,8 +40,7 @@ def main(argv: list[str] | None = None) -> None:
 
     if hasattr(args, "constant") and is_weak_gravitational_constant(args.constant):
         print(
-            "⚠ Weak gravitational constant detected — "
-            "orbital predictions may be unstable",
+            "⚠ Weak gravitational constant detected — orbital predictions may be unstable",
             file=sys.stderr,
         )
 
@@ -58,8 +68,7 @@ def _add_observe_parser(subparsers) -> None:
     p = subparsers.add_parser(
         "observe",
         help="Observe the orbital phase of a celestial body",
-        description="Calculate which phase (day) a celestial body "
-        "reaches during a given epoch and cycle.",
+        description="Calculate which phase (day) a celestial body reaches during a given epoch and cycle.",
     )
     p.add_argument("--body", "-b", required=True, help="Celestial body to observe")
     p.add_argument("--epoch", "-y", type=int, required=True, help="Epoch (year)")
@@ -73,8 +82,7 @@ def _add_interpret_parser(subparsers) -> None:
     p = subparsers.add_parser(
         "interpret",
         help="Interpret a phase observation",
-        description="Determine which celestial body corresponds "
-        "to an observed phase in a given epoch and cycle.",
+        description="Determine which celestial body corresponds to an observed phase in a given epoch and cycle.",
     )
     p.add_argument("--phase", "-p", type=int, required=True, help="Phase (day)")
     p.add_argument("--epoch", "-y", type=int, required=True, help="Epoch (year)")
@@ -88,22 +96,27 @@ def _add_chart_parser(subparsers) -> None:
     p = subparsers.add_parser(
         "chart",
         help="Chart a constellation's orbital phases",
-        description="Calculate phase alignments for each body "
-        "in a constellation across the cycles of an epoch.",
+        description="Calculate phase alignments for each body in a constellation across the cycles of an epoch.",
     )
     p.add_argument(
-        "--constellation", "-n", required=True,
+        "--constellation",
+        "-n",
+        required=True,
         help="Constellation to chart (max 12 bodies)",
     )
     p.add_argument("--epoch", "-y", type=int, required=True, help="Epoch (year)")
     p.add_argument("--constant", "-g", required=True, help="Gravitational constant")
     p.add_argument("--format", "-f", choices=["text", "json"], default="text")
     p.add_argument(
-        "--ephemeris", "-e", action="store_true",
+        "--ephemeris",
+        "-e",
+        action="store_true",
         help="Display full visual ephemeris grids",
     )
     p.add_argument(
-        "--no-color", dest="no_color", action="store_true",
+        "--no-color",
+        dest="no_color",
+        action="store_true",
         help="Disable ANSI color codes in ephemeris output",
     )
     p.set_defaults(handler=_handle_chart)
@@ -113,11 +126,12 @@ def _add_read_parser(subparsers) -> None:
     p = subparsers.add_parser(
         "read",
         help="Read a constellation chart",
-        description="Interpret a sequence of phase observations "
-        "to recover the original constellation.",
+        description="Interpret a sequence of phase observations to recover the original constellation.",
     )
     p.add_argument(
-        "--phases", "-p", required=True,
+        "--phases",
+        "-p",
+        required=True,
         help="Comma-separated phase values",
     )
     p.add_argument("--epoch", "-y", type=int, required=True, help="Epoch (year)")

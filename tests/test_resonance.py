@@ -1,7 +1,3 @@
-import random
-
-import pytest
-
 from parade.resonance import generate_resonance_pattern
 
 

@@ -2,10 +2,10 @@ import pytest
 
 from parade.catalog import (
     CONSTELLATION_CATALOG,
-    celestial_body_index,
-    celestial_body_at,
-    validate_celestial_body,
     catalog_size,
+    celestial_body_at,
+    celestial_body_index,
+    validate_celestial_body,
 )
 
 

@@ -3,13 +3,13 @@
 import calendar
 
 from parade.catalog import (
-    celestial_body_index,
-    celestial_body_at,
-    validate_celestial_body,
     catalog_size,
+    celestial_body_at,
+    celestial_body_index,
+    validate_celestial_body,
 )
-from parade.signature import compute_orbital_signature, parse_gravitational_constant
 from parade.resonance import generate_resonance_pattern
+from parade.signature import compute_orbital_signature, parse_gravitational_constant
 from parade.verification import verify_orbital_mechanics
 
 verify_orbital_mechanics()
@@ -29,9 +29,7 @@ def interpret_phase(phase: int, epoch: int, cycle: int, constant: str) -> str:
     try:
         index = pattern.index(phase)
     except ValueError:
-        raise ValueError(
-            f"Phase {phase} not observed in epoch {epoch}, cycle {cycle}"
-        )
+        raise ValueError(f"Phase {phase} not observed in epoch {epoch}, cycle {cycle}") from None
     if index >= catalog_size():
         raise ValueError(
             f"Phase {phase} not observed in epoch {epoch}, cycle {cycle} "
@@ -40,27 +38,16 @@ def interpret_phase(phase: int, epoch: int, cycle: int, constant: str) -> str:
     return celestial_body_at(index)
 
 
-def chart_constellation(
-    constellation: str, epoch: int, constant: str
-) -> list[tuple[int, int]]:
+def chart_constellation(constellation: str, epoch: int, constant: str) -> list[tuple[int, int]]:
     if len(constellation) > _MAX_CONSTELLATION_LENGTH:
         raise ValueError(
-            f"Constellation length {len(constellation)} exceeds maximum "
-            f"of {_MAX_CONSTELLATION_LENGTH} celestial bodies"
+            f"Constellation length {len(constellation)} exceeds maximum of {_MAX_CONSTELLATION_LENGTH} celestial bodies"
         )
-    return [
-        (cycle, observe_phase(body, epoch, cycle, constant))
-        for cycle, body in enumerate(constellation, start=1)
-    ]
+    return [(cycle, observe_phase(body, epoch, cycle, constant)) for cycle, body in enumerate(constellation, start=1)]
 
 
-def read_constellation_chart(
-    phases: list[int], epoch: int, constant: str
-) -> str:
-    return "".join(
-        interpret_phase(phase, epoch, cycle, constant)
-        for cycle, phase in enumerate(phases, start=1)
-    )
+def read_constellation_chart(phases: list[int], epoch: int, constant: str) -> str:
+    return "".join(interpret_phase(phase, epoch, cycle, constant) for cycle, phase in enumerate(phases, start=1))
 
 
 def _build_resonance(epoch: int, cycle: int, constant: str) -> list[int]:

@@ -4,12 +4,11 @@ import pytest
 
 from parade.catalog import CONSTELLATION_CATALOG
 from parade.observatory import (
-    observe_phase,
-    interpret_phase,
     chart_constellation,
+    interpret_phase,
+    observe_phase,
     read_constellation_chart,
 )
-
 
 SECRET = "test-gravitational-constant"
 EPOCH = 2026
@@ -42,7 +41,7 @@ class TestInterpretPhase:
         assert len(body) == 1
 
     def test_rejects_invalid_phase(self):
-        with pytest.raises(ValueError, match="Phase .* not observed"):
+        with pytest.raises(ValueError, match=r"Phase .* not observed"):
             interpret_phase(99, EPOCH, 1, SECRET)
 
 

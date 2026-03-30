@@ -16,16 +16,10 @@ def celestial_body_index(body: str) -> int:
 
 def celestial_body_at(index: int) -> str:
     if not 0 <= index < len(CONSTELLATION_CATALOG):
-        raise ValueError(
-            f"Celestial body index out of range: "
-            f"expected 0–{len(CONSTELLATION_CATALOG) - 1}, got {index}"
-        )
+        raise ValueError(f"Celestial body index out of range: expected 0–{len(CONSTELLATION_CATALOG) - 1}, got {index}")
     return CONSTELLATION_CATALOG[index]
 
 
 def validate_celestial_body(body: str) -> None:
     if body not in _BODY_TO_INDEX:
-        raise ValueError(
-            f"Unknown celestial body '{body}': "
-            f"not found in constellation catalog"
-        )
+        raise ValueError(f"Unknown celestial body '{body}': not found in constellation catalog")
