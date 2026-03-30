@@ -115,3 +115,10 @@ class TestReadConstellationChart:
         phases = [phase for _, phase in chart]
         recovered = read_constellation_chart(phases, EPOCH, SECRET)
         assert recovered == word
+
+
+class TestGoldenDeterminism:
+    def test_known_word_produces_exact_phases(self):
+        result = chart_constellation("hello", 2026, "golden-test-key")
+        expected = [(1, 24), (2, 23), (3, 12), (4, 4), (5, 2)]
+        assert result == expected
