@@ -1,9 +1,8 @@
 import os
-import tempfile
 
 import pytest
 
-from parade.print.cli import main, _default_filename
+from parade.print.cli import _default_filename, main
 
 
 class TestDefaultFilename:

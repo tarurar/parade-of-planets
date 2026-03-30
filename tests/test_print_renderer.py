@@ -1,8 +1,6 @@
 import os
 import tempfile
 
-import pytest
-
 from parade.print.renderer import render_ephemeris_pdf
 
 
@@ -98,9 +96,9 @@ def _count_pdf_pages(path: str) -> int:
 
 
 def _read_pdf_text(path: str) -> str:
+    import base64
     import re
     import zlib
-    import base64
 
     with open(path, "rb") as f:
         data = f.read()

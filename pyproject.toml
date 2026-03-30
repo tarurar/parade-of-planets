@@ -24,7 +24,7 @@ testpaths = ["tests"]
 addopts = "--cov=parade --cov-report=term-missing --cov-fail-under=90"
 
 [tool.coverage.run]
-omit = ["parade/cli.py", "parade/__main__.py"]
+omit = ["parade/cli.py", "parade/__main__.py", "parade/print/cli.py"]
 
 [tool.ruff]
 target-version = "py312"
@@ -50,3 +50,7 @@ python_version = "3.12"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = "reportlab.*"
+ignore_missing_imports = true
