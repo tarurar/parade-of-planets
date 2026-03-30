@@ -1,5 +1,7 @@
 """Parade of Planets — command-line orbital phase calculator."""
 
+from __future__ import annotations
+
 import argparse
 import json
 import sys
