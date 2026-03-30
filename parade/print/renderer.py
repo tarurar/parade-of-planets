@@ -8,8 +8,19 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen.canvas import Canvas
 
 _MONTH_ABBR = [
-    "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    "",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
 ]
 
 _WEEKDAY_HEADERS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
@@ -53,9 +64,7 @@ def _draw_page_number(c: Canvas, page_width: float, current: int, total: int) ->
     c.drawRightString(page_width - _MARGIN, _MARGIN - 10, f"[{current}/{total}]")
 
 
-def _draw_year_block(
-    c: Canvas, year: int, left: float, top: float, width: float, height: float
-) -> None:
+def _draw_year_block(c: Canvas, year: int, left: float, top: float, width: float, height: float) -> None:
     header_height = 8 * mm
     c.setFont("Helvetica-Bold", 16)
     c.drawCentredString(left + width / 2, top - header_height + 2, str(year))
