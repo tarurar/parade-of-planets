@@ -10,7 +10,7 @@ def generate_resonance_pattern(orbital_signature: bytes, cycle_length: int) -> l
     return phases
 
 
-def _fisher_yates(rng: random.Random, arr: list) -> None:
+def _fisher_yates(rng: random.Random, arr: list[int]) -> None:
     for i in range(len(arr) - 1, 0, -1):
         j = _bounded_random(rng, i)
         arr[i], arr[j] = arr[j], arr[i]

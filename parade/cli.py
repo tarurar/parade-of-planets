@@ -64,7 +64,7 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _add_observe_parser(subparsers) -> None:
+def _add_observe_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
     p = subparsers.add_parser(
         "observe",
         help="Observe the orbital phase of a celestial body",
@@ -78,7 +78,7 @@ def _add_observe_parser(subparsers) -> None:
     p.set_defaults(handler=_handle_observe)
 
 
-def _add_interpret_parser(subparsers) -> None:
+def _add_interpret_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
     p = subparsers.add_parser(
         "interpret",
         help="Interpret a phase observation",
@@ -92,7 +92,7 @@ def _add_interpret_parser(subparsers) -> None:
     p.set_defaults(handler=_handle_interpret)
 
 
-def _add_chart_parser(subparsers) -> None:
+def _add_chart_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
     p = subparsers.add_parser(
         "chart",
         help="Chart a constellation's orbital phases",
@@ -122,7 +122,7 @@ def _add_chart_parser(subparsers) -> None:
     p.set_defaults(handler=_handle_chart)
 
 
-def _add_read_parser(subparsers) -> None:
+def _add_read_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
     p = subparsers.add_parser(
         "read",
         help="Read a constellation chart",
@@ -140,7 +140,7 @@ def _add_read_parser(subparsers) -> None:
     p.set_defaults(handler=_handle_read)
 
 
-def _handle_observe(args) -> None:
+def _handle_observe(args: argparse.Namespace) -> None:
     day = observe_phase(args.body, args.epoch, args.cycle, args.constant)
     if args.format == "json":
         print(json.dumps({"phase": day}))
@@ -148,7 +148,7 @@ def _handle_observe(args) -> None:
         print(f"Phase: {day}")
 
 
-def _handle_interpret(args) -> None:
+def _handle_interpret(args: argparse.Namespace) -> None:
     body = interpret_phase(args.phase, args.epoch, args.cycle, args.constant)
     display = "void" if body == " " else body
     if args.format == "json":
@@ -157,7 +157,7 @@ def _handle_interpret(args) -> None:
         print(f"Celestial body: {display}")
 
 
-def _handle_chart(args) -> None:
+def _handle_chart(args: argparse.Namespace) -> None:
     chart = chart_constellation(args.constellation, args.epoch, args.constant)
     if args.format == "json":
         print(json.dumps({"chart": [{"cycle": c, "phase": p} for c, p in chart]}))
@@ -171,7 +171,7 @@ def _handle_chart(args) -> None:
             print(f"  Cycle {cycle:2d} ({month:>9s}):  phase {phase}")
 
 
-def _handle_read(args) -> None:
+def _handle_read(args: argparse.Namespace) -> None:
     phases = [int(p.strip()) for p in args.phases.split(",")]
     word = read_constellation_chart(phases, args.epoch, args.constant)
     if args.format == "json":
