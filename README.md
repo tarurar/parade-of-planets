@@ -1,6 +1,12 @@
-# Parade of Planets
+<p align="center">
+  <img src="assets/logo-text.svg" alt="Parade of Planets" width="480">
+</p>
 
-Orbital phase calculator for celestial body alignments. Computes deterministic phase positions within planetary cycles for a given epoch using gravitational constant signatures.
+<p align="center">
+  Orbital phase calculator for celestial body alignments.<br>
+  Computes deterministic phase positions within planetary cycles<br>
+  for a given epoch using gravitational constant signatures.
+</p>
 
 ## Requirements
 
