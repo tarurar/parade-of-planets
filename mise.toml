@@ -3,7 +3,7 @@ python = "3.13"
 
 [tasks.install]
 description = "Install package in editable mode with dev dependencies"
-run = "pip install -e . && pip install pytest pytest-cov mypy ruff pre-commit"
+run = "pip install -e '.[print]' && pip install pytest pytest-cov mypy ruff pre-commit"
 
 [tasks.test]
 description = "Run tests with coverage"
@@ -44,3 +44,7 @@ run = "pre-commit run --all-files"
 [tasks."hooks:install"]
 description = "Install pre-commit hooks into git"
 run = "pre-commit install"
+
+[tasks.print]
+description = "Generate printable ephemeris PDF, e.g. mise run print -- --start 2026 --years 6"
+run = "python -m parade.print.cli {{arg(name='args')}}"

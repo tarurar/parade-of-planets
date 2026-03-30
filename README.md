@@ -86,6 +86,23 @@ parade chart --constellation "hello" --epoch 2026 --constant "my-gravitational-c
 # {"chart": [{"cycle": 1, "phase": 17}, {"cycle": 2, "phase": 5}, ...]}
 ```
 
+### Print calendars
+
+Generate printable PDF calendars (requires optional dependency):
+
+```bash
+pip install parade-of-planets[print]
+```
+
+```bash
+parade-print --start 2026 --years 6
+# → parade_2026_6y.pdf
+
+parade-print --start 2026 --years 6 --output calendars.pdf
+```
+
+Each page contains 2 years in a 4x3 month grid layout, optimized for A4 portrait printing. Pages are numbered `[1/N]`.
+
 ## Library API
 
 ```python
@@ -141,5 +158,6 @@ All dev tooling is unified under `mise run`:
 | `mise run format:check` | Check formatting without changes |
 | `mise run typecheck` | Run mypy strict type checking |
 | `mise run hooks` | Run all pre-commit hooks manually |
+| `mise run print -- --start 2026 --years 6` | Generate printable PDF calendars |
 
 Run `mise tasks` to see the full list.
