@@ -45,6 +45,26 @@ run = "pre-commit run --all-files"
 description = "Install pre-commit hooks into git"
 run = "pre-commit install"
 
+[tasks.observe]
+description = "Observe a celestial body's phase, e.g. mise run observe -- --body a --epoch 2026 --cycle 3 --constant secret"
+run = "python -m parade observe"
+raw = true
+
+[tasks.interpret]
+description = "Interpret a phase observation, e.g. mise run interpret -- --phase 17 --epoch 2026 --cycle 3 --constant secret"
+run = "python -m parade interpret"
+raw = true
+
+[tasks.chart]
+description = "Chart a constellation, e.g. mise run chart -- --constellation hello --epoch 2026 --constant secret"
+run = "python -m parade chart"
+raw = true
+
+[tasks.read]
+description = "Read a constellation chart, e.g. mise run read -- --phases 17,5,22,11,3 --epoch 2026 --constant secret"
+run = "python -m parade read"
+raw = true
+
 [tasks.print]
 description = "Generate printable ephemeris PDF, e.g. mise run print -- --start 2026 --years 6"
 run = "python -m parade.print.cli"
