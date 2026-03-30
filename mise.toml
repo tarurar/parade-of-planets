@@ -47,4 +47,5 @@ run = "pre-commit install"
 
 [tasks.print]
 description = "Generate printable ephemeris PDF, e.g. mise run print -- --start 2026 --years 6"
-run = "python -m parade.print.cli {{arg(name='args')}}"
+run = "python -m parade.print.cli"
+raw = true
