@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "parade-of-planets"
@@ -8,8 +8,16 @@ version = "0.1.0"
 description = "Parade of planets phase calculator"
 requires-python = ">=3.12"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["parade*"]
+
 [project.scripts]
 parade = "parade.cli:main"
+parade-print = "parade.print.cli:main"
+
+[project.optional-dependencies]
+print = ["reportlab>=4.0"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
