@@ -110,55 +110,30 @@ A warning is emitted for constants shorter than 16 characters (passphrase) or 12
 ### Prerequisites
 
 - Python 3.12+
-- pip
+- [mise](https://mise.jdx.dev/) task runner
 
-### Install dependencies
-
-```bash
-pip install -e .
-pip install pytest pytest-cov mypy ruff pre-commit
-```
-
-### Pre-commit hooks
-
-The repository includes a `.pre-commit-config.yaml` that runs ruff (lint + format) and mypy before each commit.
+### Getting started
 
 ```bash
-pre-commit install
+mise install           # install Python version from mise.toml
+mise run install       # install package and dev dependencies
+mise run hooks:install # set up pre-commit hooks
 ```
 
-To run all hooks manually against the entire codebase:
+### Common tasks
 
-```bash
-pre-commit run --all-files
-```
+All dev tooling is unified under `mise run`:
 
-### Running tests
+| Command | Description |
+|---|---|
+| `mise run check` | Run all checks (lint, format, typecheck, tests) |
+| `mise run test` | Run tests with coverage |
+| `mise run test:single -- RoundTrip` | Run tests matching a pattern |
+| `mise run lint` | Run ruff linter |
+| `mise run lint:fix` | Run ruff linter with auto-fix |
+| `mise run format` | Run ruff formatter |
+| `mise run format:check` | Check formatting without changes |
+| `mise run typecheck` | Run mypy strict type checking |
+| `mise run hooks` | Run all pre-commit hooks manually |
 
-Tests run with coverage reporting (90% threshold on library code):
-
-```bash
-pytest
-```
-
-To run a specific test:
-
-```bash
-pytest tests/test_observatory.py::TestRoundTrip::test_all_bodies_round_trip_january -v
-```
-
-### Linting and formatting
-
-```bash
-ruff check .          # lint
-ruff check --fix .    # lint with auto-fix
-ruff format .         # format
-```
-
-### Type checking
-
-Strict mode is enabled for the `parade/` package:
-
-```bash
-mypy parade/
-```
+Run `mise tasks` to see the full list.

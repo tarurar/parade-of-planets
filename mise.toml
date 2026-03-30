@@ -1,0 +1,46 @@
+[tools]
+python = "3.13"
+
+[tasks.install]
+description = "Install package in editable mode with dev dependencies"
+run = "pip install -e . && pip install pytest pytest-cov mypy ruff pre-commit"
+
+[tasks.test]
+description = "Run tests with coverage"
+run = "python -m pytest tests/"
+
+[tasks."test:single"]
+description = "Run a single test by pattern, e.g. mise run test:single -- RoundTrip"
+run = "python -m pytest tests/ -k \"{{arg(name='pattern')}}\" -v --no-cov"
+
+[tasks.lint]
+description = "Run ruff linter"
+run = "ruff check ."
+
+[tasks."lint:fix"]
+description = "Run ruff linter with auto-fix"
+run = "ruff check --fix ."
+
+[tasks.format]
+description = "Run ruff formatter"
+run = "ruff format ."
+
+[tasks."format:check"]
+description = "Check formatting without applying changes"
+run = "ruff format --check ."
+
+[tasks.typecheck]
+description = "Run mypy strict type checking on library code"
+run = "mypy parade/"
+
+[tasks.check]
+description = "Run all checks: lint, format, typecheck, tests"
+depends = ["lint", "format:check", "typecheck", "test"]
+
+[tasks.hooks]
+description = "Run all pre-commit hooks against entire codebase"
+run = "pre-commit run --all-files"
+
+[tasks."hooks:install"]
+description = "Install pre-commit hooks into git"
+run = "pre-commit install"
