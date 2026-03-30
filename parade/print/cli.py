@@ -56,3 +56,7 @@ def _handle_print(args: argparse.Namespace) -> None:
 
 def _default_filename(start: int, years: int) -> str:
     return f"parade_{start}_{years}y.pdf"
+
+
+if __name__ == "__main__":
+    main()
